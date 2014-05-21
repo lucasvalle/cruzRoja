@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Sistema de Impresion de Reportes</title>
+	<title>nueva Version</title>
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/imprimir.css" media="print">
 </head>
