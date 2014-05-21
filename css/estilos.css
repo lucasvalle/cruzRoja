@@ -1,0 +1,135 @@
+/*etiquetas*/
+body{
+	background: #f3f3f3;
+	bsackground-image: url(../img/bg.png);
+	-ms-overflow-y: scroll;
+	    overflow-y: scroll;	
+}
+.page-header{
+	margin-top: 0;
+}
+small{
+	color: red;
+	display: none;
+}
+header{
+	margin-top: 15px;
+	-webkit-border-radius: 10px 10px 0 0;
+	        border-radius: 10px 10px 0 0;
+	background: #6D85E2 url(http://cdn8.staztic.com/app/a/3470/3470739/cool-red-wallpapers-11-2-s-307x512.jpg) center top;
+	-webkit-background-size: cover;
+	     -o-background-size: cover;
+	        background-size: cover;
+}
+
+section.body{
+background-color: white;
+padding:15px;
+}
+footer{
+	background-color: rgba(255,0,0,0.9);
+	color: white;
+	
+}
+/*clases*/
+.navbar{
+	border:0px none
+}
+
+.navbar-default {
+background-color:transparent;
+margin-right: 20px;
+margin-top: 59px;
+}
+.navbar{
+	padding: 0px;
+	color: white;
+}
+.navbar  label{
+	color:#fff;
+	padding: 0 5px;
+}
+
+/*color del hover*/
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+color: #262626;
+text-decoration: none;
+background-color: #809AF7;
+}
+/*color de los  menus en el evento hover*/
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+color: #555;
+background-color: transparent;
+}
+.navbar-nav > li > a {
+  line-height:20px;
+  padding-bottom:0px;
+  padding-top:10px;
+}
+
+/*identicadores*/
+.shadow{
+-webkit-box-shadow: 0 0 0px rgba(0,0,0,0.5);
+        box-shadow: 0 0 0px rgba(0,0,0,0.5);
+}
+
+.ocultar{
+	display: none;
+}
+#logo{
+	background-color: rgba(255,255,255,0.5);
+	margin-top: 0px;
+	padding-bottom: 15px;
+}
+#logo h1{
+	margin: 0;
+	padding: 0;
+}
+#seccional{
+	margin: 0 auto;
+	line-height: 2em;
+	-webkit-border-radius: 0 0 15px 15px;
+	        border-radius: 0 0 15px 15px;
+	text-align: center;
+	padding: 0;
+	background-color: rgba(255,255,255,0.5);
+	width: 400px;
+	display: block;
+	color: #FFF;
+	font-weight: normal;
+	font-size: 1.5em;
+	text-transform: uppercase;
+}
+#adminSection{
+	display: block;
+	text-align: right;
+	margin-right: 30px;
+}
+#adminSection a{
+	color: #FFF;
+	text-align: right;
+	text-transform: capitalize;
+	text-decoration: none;
+	
+}
+#adminSection a:hover{
+	color: #D0E659;
+}
+.form-control{
+	-webkit-border-radius: 0;
+	        border-radius: 0;
+	   border: 1px solid #c0c0c0;
+	   background-color: white;
+	   -webkit-box-shadow: none;
+	           box-shadow: none;
+}
+.form-control:focus{
+	font-weight: bold;
+	color: #3498db;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+	background-color: #D6EAF8;
+}

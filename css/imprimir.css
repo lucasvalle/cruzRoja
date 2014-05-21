@@ -1,0 +1,42 @@
+.encabezado{
+  font-size: 20pt;
+  color:#B00000 !important;
+  text-transform: uppercase;
+  word-spacing: 5pt;
+}
+body{
+  font-family: arial;
+  font-size: 12pt;
+  color: #000000;
+  font-weight: normal;
+}
+* {
+    color: #000 !important;
+    text-shadow: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .table {
+    border-collapse: collapse !important;
+  }
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #ddd !important;
+  }
+    .table-striped > tbody > tr:nth-child(odd) > td, 
+    .table-striped > tbody > tr:nth-child(odd) > th {
+background-color: #DDD9D9 !important;
+}
+    h1{
+      font-size: 20px;
+      color: blue !important;
+    }
+
+   h1, h2, h3 {
+    page-break-after:avoid;
+    }
+
+@page {
+  size: letter portrait;
+  margin:5cm !important;
+}
