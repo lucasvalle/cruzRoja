@@ -14,7 +14,7 @@
 			<td width="60%" align="center">
 				<h1 class="encabezado">Cruz roja Salvadoreña</h1>
 				<h3>Seccional Ciudad Arce</h3>
-				<p>direccion pendiente</p>
+				<p>Km 36 1/2, Carretera a Santa Ana. La Libertad</p>
 				<p><b>Tel</b> 24066057</p>
 			</td>
 			<td width="20%"><img src="../img/cruz-y-luna-roja4.jpg" height="120" alt=""></td>

@@ -1,11 +1,15 @@
 <?php 
 require_once 'Template.php';
-require_once 'controller/GraficoAnualDeEgresos.php';
+if(!isset($year))
+    $year=date("Y");
+include 'controller/GraficoAnualDeEgresos.php';
+
 $template=new Template();
 $template->makeHeader("titulo de la pagina web"); ?>
 <script src="js/amcharts.js"></script>
 <script src="js/serial.js"></script>
 <script type="text/javascript">
+ console.log(chartData)
 AmCharts.ready(function () {
                 // SERIAL CHART
                 chart = new AmCharts.AmSerialChart();
@@ -50,14 +54,21 @@ AmCharts.ready(function () {
             });
         </script>
 <!-- aqui inicia el contenido -->
-<div id="datos"></div>
+<div class="row">
+    <div class="col-lg-2 col-md-2 pull-right">
+        <form action="">
+            <input type="text" value="<?=$year?>" name="year" class="form-control col-lg-2" id="" placeholder="año">
+        </form>
+    </div>
+</div>
 <div class="row">
 	<div class="col-lg-12 col-md-12">
-		<h2>Grafica de Egresos <?=date("Y")?></h2>
+		<h2>Grafica de Egresos <?=$year?></h2>
 	</div>
 	<div class="col-lg-12 col-md-12">
         <div id="grafico" style="width: 100%; height: 400px;"></div>
 	</div>
 </div>
+<div id="view"></div>
 <!-- fin del contenido -->
 <?php $template->makeFooter() ?>

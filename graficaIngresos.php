@@ -1,6 +1,8 @@
 <?php 
 require_once 'Template.php';
-require_once 'controller/GraficoAnualDeIngresos.php';
+if(!isset($year))
+$year=date("Y");
+include 'controller/GraficoAnualDeIngresos.php';
 $template=new Template();
 $template->makeHeader("titulo de la pagina web"); ?>
 <script src="js/amcharts.js"></script>
@@ -48,7 +50,14 @@ AmCharts.ready(function () {
             });
         </script>
 <!-- aqui inicia el contenido -->
-<div id="datos"></div>
+<div class="row">
+    <div class="col-lg-2 col-md-2 pull-right">
+        <form action="">
+            <input type="text" value="<?=$year?>" name="year" class="form-control col-lg-2" id="" placeholder="año">
+        </form>
+    </div>
+</div>
+
 <div class="row">
 	<div class="col-lg-12 col-md-12">
 		<h2>Grafica de Ingresos <?=date("Y")?></h2>
