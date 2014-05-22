@@ -1,4 +1,6 @@
-<?php require '../controller/Manager.php'; ?>
+<?php require '../controller/Manager.php'; 
+$meses = array("01"=>"Enero","02"=>"Febrero","03"=>"Marzo","04"=>"Abril","05"=>"Mayo","06"=>"Junio","07"=>"Julio","08"=>"Agosto","09"=>"Septiembre","10"=>"Octubre","11"=>"Noviembre","12"=>"Diciembre");
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,6 +22,31 @@
 			<td width="20%"><img src="../img/cruz-y-luna-roja4.jpg" height="120" alt=""></td>
 		</tr>
 	</table>
+	<?php if(isset($mes)): ?>
+	<table width="100%" align="center">
+		<tr>
+			<td width="20%">
+				Mes: <?=$meses[$mes]?>
+			</td>
+			<td  width="60%"></td>
+			<td width="20%">
+				Año: <?=$anio?>
+			</td>
+		</tr>
+	</table>
+<?php elseif(isset($hasta)): ?>
+	<table width="100%" align="center">
+		<tr>
+			<td width="20%">
+				Mes: <?=$meses[date("m", strtotime($hasta))]?>
+			</td>
+			<td width="60%"></td>
+			<td width="20%">
+				Año: <?=date("Y", strtotime($hasta))?>
+			</td>
+		</tr>
+	</table>
+	<?php endif;  ?>
 	<?php 
 		if(isset($report)):
 			include $report.".php";
