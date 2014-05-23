@@ -1,4 +1,12 @@
 <?php 
+@session_start();
+if(@$_SESSION["respaldo"]!=="true"){
+	?>
+	<script>
+		location.replace("seguridadRespaldo")
+	</script>
+	<?php
+}
 require_once 'Template.php';
 $template=new Template();
 $template->makeHeader("titulo de la pagina web"); ?>
@@ -11,8 +19,9 @@ $template->makeHeader("titulo de la pagina web"); ?>
 	</div>
 </div>
 <div class="row">
-	<div class="col-lg-4 col-md-4 text-center">
+	<div class="col-lg-5 col-md-5 text-center">
 		<a href="#" class="btn btn-info btn-lg respaldo"><i class="fa fa-gear fa-3x pull-left"></i> Generar <br> Respaldo</a>
+		<a href="salirModoSeguro" class="btn btn-danger btn-lg"><i class="fa fa-sign-out fa-3x pull-left"></i>salir del modo <br> seguro</a>
 	</div>
 	<div class="col-lg-6 col-md-6">
 		<?php 
