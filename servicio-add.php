@@ -5,6 +5,9 @@ $interface=new Servicio();
 
 $cta=new Donacion();
 
+
+$casos=new manager();
+
 require_once 'Template.php';
 $template=new Template();
 $template->makeHeader("titulo de la pagina web"); ?>
@@ -18,6 +21,7 @@ $template->makeHeader("titulo de la pagina web"); ?>
 </div>
 <div class="row">
 		<div class="col-lg-12 col-md-12">
+			<?php if($casos->contar("select * from casos")>0): ?>
 			<form action="controller/Servicios.php" method="post" id="frmServicios">
 			<div class="row">
 				<div class="col-lg-2 col-md-2"><label for="">Caso</label>
@@ -141,6 +145,9 @@ $template->makeHeader("titulo de la pagina web"); ?>
 				</div>
 			</div>
 		</form>
+	<?php else: ?>
+	<div class="alert alert-danger">no hay casos registrados <a href="casos" class="btn btn-danger"><i class="fa fa-plus"></i> Nuevo Caso</a></div>
+<?php endif; ?>
 		</div>
 </div>
 <!-- fin del contenido -->
