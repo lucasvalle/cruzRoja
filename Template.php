@@ -40,7 +40,7 @@ class Template
 				<div class="col-lg-3 col-md-3 text-center">
 					<div id="logo">
 					<h1 class="">Cruz Roja Salvadoreña</h1>
-					<a href="/"><img src="http://elsalvadordejapon311.files.wordpress.com/2011/03/nuevo_emblema_indicativo.jpg" height="150" alt=""></a>
+					<a href="/"><img src="img/nuevo_emblema_indicativo.jpg" height="150" alt=""></a>
 					</div>
 				</div>
 				<div class="col-lg-9 col-md-9">
@@ -65,7 +65,8 @@ class Template
 								</a>
 									<ul class="dropdown-menu" align="left">
 										<li><a href="nuevaambulancia"><i class="fa fa-truck"></i> Ambulancias</a></li>
-										<li><a href="servicio-add.php"><i class="fa fa-times" ></i> Nuevo servicio</a></li>
+										<li><a href="servicios"><i class="fa fa-times" ></i> Servicios</a></li>
+										<li><a href="servicio-add"><i class="fa fa-times" ></i> Nuevo servicio</a></li>
 										<li><a href="curacionlocal"><i class="fa fa-crosshairs"></i> Casos Locales</a></li>
 										<!-- <li><a href="#"><i class="fa fa-print" ></i> Reporte de ambulancia</a></li> -->
 										<li><a href="reporteconsolidadodecasos"><i class="fa fa-print" ></i> Reporte de servicio mensual</a></li>

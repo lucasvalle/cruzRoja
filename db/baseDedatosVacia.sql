@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2014 a las 08:24:24
+-- Tiempo de generación: 27-05-2014 a las 11:17:06
 -- Versión del servidor: 5.5.32
 -- Versión de PHP: 5.4.19
 
@@ -34,14 +34,14 @@ CREATE TABLE IF NOT EXISTS `administradores` (
   `user` varchar(30) NOT NULL,
   `pass` varchar(120) NOT NULL,
   PRIMARY KEY (`idAdmin`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `administradores`
 --
 
 INSERT INTO `administradores` (`idAdmin`, `nombre`, `user`, `pass`) VALUES
-(13, 'admin', 'admin', 'bdc8341bb7c06ca3a3e9ab7d39ecb789');
+(1, 'admin', 'admin', 'bdc8341bb7c06ca3a3e9ab7d39ecb789');
 
 -- --------------------------------------------------------
 
@@ -98,7 +98,14 @@ CREATE TABLE IF NOT EXISTS `conceptocuenta` (
   `CtaContable` int(20) NOT NULL,
   `concepto` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`idCta`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `conceptocuenta`
+--
+
+INSERT INTO `conceptocuenta` (`idCta`, `CtaContable`, `concepto`) VALUES
+(1, 589744, 'Donaciones');
 
 -- --------------------------------------------------------
 
@@ -145,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `donativo` (
   `Donante` varchar(50) NOT NULL,
   `Cantidad` double NOT NULL,
   `DUI` char(10) DEFAULT NULL,
-  `NIT` char(10) DEFAULT NULL,
+  `NIT` char(20) DEFAULT NULL,
   `Fecha` date DEFAULT NULL,
   PRIMARY KEY (`IdDonativo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -191,6 +198,10 @@ CREATE TABLE IF NOT EXISTS `servicioambulancia` (
   PRIMARY KEY (`IdServicioAmbulancia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+
+GRANT select, insert, update, delete
+ON cruzroja.*
+TO cruser@localhost identified by 'admin2014';
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

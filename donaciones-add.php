@@ -25,7 +25,7 @@ $cuenta = new Donacion();
 							<div class="col-lg-12">
 								<label for="">Donante:</label>
 								<small></small>
-								<input type="text" name="Donante" id="Donante" class="form-control" validar value="" required="required" pattern="^[a-zA-Z ñÑ]+$" title=" solo letras">
+								<input type="text" name="Donante" id="Donante" class="form-control" validar value="" required="required" pattern="^[a-zA-Z ñÑáéíóú]+$" title=" solo letras">
 							</div>
 						
 						</div>
@@ -88,6 +88,9 @@ $cuenta = new Donacion();
 
 					if(datos.noInsert)
 						$("#error").append("<li>"+datos.noInsert).fadeIn()
+
+					if(datos.noVale)
+						$("#error").append("<li>"+datos.noVale).fadeIn()
 					
 					if(datos.insert){
 						$("#success").html(datos.insert).fadeIn()

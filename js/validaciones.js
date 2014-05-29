@@ -15,19 +15,19 @@
       var pass2=campo.attr("pass1")
 		if(requerido!==undefined && length==0){
 				$(campo).prev().fadeIn().html(" este campo es obligatorio");
-				focus=campo.focus();
+				// focus=campo.focus();
         return false;
 		}else if(filtro!==undefined && filtro.test(valor)==false){
                           $(campo).prev().fadeIn().html("El Formato no es valido ejm. "+ ejm);
-				focus=campo.focus();
+				// focus=campo.focus();
         return false;
             }else if(min!==undefined && length<min){
                                   $(campo).prev().fadeIn().html("Minimo " + min + " Caracteres");
-                          focus=campo.focus();
+                          // focus=campo.focus();
                           return false;
             }else if(max!==undefined && length>max){
                                   $(campo).prev().fadeIn().html("Maximo " + max + " Caracteres");
-                            focus=campo.focus();
+                            // focus=campo.focus();
                             return false;
         	}
     }
@@ -42,7 +42,7 @@
   $this=$(this)
   if($this.data("saldo")<$this.val()){
     $this.prev().fadeIn().html("No Alcanza") 
-    $this.focus()
+    // $this.focus()
     $this.val("")
   }
   })
@@ -59,6 +59,21 @@
     }else{
       $("input[pass]").prev().children().fadeOut();
     }     
-
   })
 
+  $(document).on("blur","input[anio]",function(){
+    $this=$(this)
+      if($this.val()<1950)
+      $(this).prev().fadeIn().html("solo años mayores a 1950")
+    else
+      $(this).prev().fadeOut();
+  })
+
+  /*validar horas*/
+  $(document).on("blur","input[horas]",function(){
+    $this=$(this)
+      if($this.val()>24)
+      $(this).prev().fadeIn().html("no mas de 24 horas")
+    else
+      $(this).prev().fadeOut();
+  })

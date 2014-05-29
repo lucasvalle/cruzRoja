@@ -10,13 +10,13 @@ $cuenta=new Egreso();
 $ingresos=new Manager();
 $ingresos->consultar("SELECT SUM(Cantidad) as total FROM donativo where Fecha between '$desde' and '$hasta'");
 $row=$ingresos->resultado();
-$TotalIngreso=number_format($row->total,2);
+$TotalIngreso=$row->total;
 
 /*calcular el total de las entraads*/
 $Egreso=new Manager();
 $Egreso->consultar("SELECT SUM(Egresos) as total FROM contabilidad where Fecha between '$desde' and '$hasta'");
 $rowE=$Egreso->resultado();
-$TotalEgreso=number_format($rowE->total,2);
+$TotalEgreso=$rowE->total;
 
 $saldo=$TotalIngreso-$TotalEgreso;
 ?>

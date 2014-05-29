@@ -49,6 +49,7 @@ $template->makeHeader("titulo de la pagina web"); ?>
 							<td>
 								<a href="<?=$carpeta.$archivo?>" class="btn btn-info"><i class="fa fa-download"></i></a>
 								<a href="<?=$archivo?>" class="btn btn-danger delete" ><i class="fa fa-trash-o"></i></a>
+								<a href="cargarRespaldo?archivo=<?=$archivo?>" data-name="<?=$archivo?>" class="btn btn-success refresh" ><i class="fa fa-refresh"></i></a>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -68,15 +69,17 @@ $template->makeHeader("titulo de la pagina web"); ?>
 				$.ajax({
 					url:'controller/Respaldo.php?respaldar',
 					success:function(datos){
-						if(datos)
-							{
-								alert("se creo satisfactoriamente")
 								location.reload()
-							}
-						else
-							alert("no se pudo crear el respaldo")
 					}
 				})
+		})
+
+		$("a.refresh").on("click",function(e){
+			$this=$(this);
+			if(confirm("Esta seguro que desea cambiar la base de datos a:" + $this.data("name")+ "despues de este proceso no podra recuperar los datos perdidos"))
+				return true
+			else
+				return false
 		})
 
 		/*eliminar*/

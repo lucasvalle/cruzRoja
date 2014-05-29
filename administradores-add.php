@@ -17,13 +17,13 @@
 			<div class="form-group">
 				<label class="sr-only" for="">Contraseña</label>
 				<small></small>
-				<input pass type="pass" name="pass" validar min="5" max="15" id="input" class="form-control" value="" required="required" placeholder="contraseña" title="">
+				<input pass type="password" name="pass" validar min="5" max="15" id="input" class="form-control" value="" required="required" placeholder="contraseña" title="">
 			</div>
 
 			<div class="form-group">
 				<label class="sr-only" for="">Confirmar Contraseña</label>
 				<small></small>
-				<input  confirm type="pass" name="pass2" validar min="5" max="15" id="input" class="form-control" value="" required="required" placeholder="vuelve a escribir la contraseña" title="">
+				<input  confirm type="password" name="pass2" validar min="5" max="15" id="input" class="form-control" value="" required="required" placeholder="vuelve a escribir la contraseña" title="">
 			</div>
 			<input type="hidden" name="new">
 			<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>

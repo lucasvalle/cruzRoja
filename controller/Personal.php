@@ -101,4 +101,9 @@ while($row=$person->resultado()):
 		<?php
 endwhile;
 }
+
+if(isset($Carne)){
+	$bs=new Manager();
+	echo $bs->contar("select * from personal where Carnet='$Carne'");
+}
  ?>

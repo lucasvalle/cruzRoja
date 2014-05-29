@@ -27,7 +27,7 @@ require_once 'controller/Listas.php';
 							<div class="col-lg-6">
 								<label for="">Horas laboradas:</label>
 								<small></small>
-								<input validar required="required" type="text" name="HorasLaboradas" id="input" class="form-control" value="" required="required" title="">
+								<input validar horas required="required" type="text" name="HorasLaboradas" id="input" class="form-control" value="" required="required" title="">
 							</div>
 						
 							<div class="col-lg-6">

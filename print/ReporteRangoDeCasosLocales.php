@@ -20,7 +20,7 @@
 								<?php while($row=$buscar->resultado()): ?>
 								<tr>
 									<td class="text-right"><?=$total->contar("select * from curacionlocal where Caso=$row->IdCasos and Fecha between '$desde' and '$hasta'")?></td>
-									<td><?=$row->NombreCaso?></td>
+									<td><?=$row->Descripcion?></td>
 								</tr>
 								<?php endwhile; ?>
 							</tbody>

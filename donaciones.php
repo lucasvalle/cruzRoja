@@ -1,6 +1,7 @@
 <?php 
 require_once 'controller/Donaciones.php';
 require_once 'controller/Listas.php';
+require_once 'controller/saldo.php';
 require_once 'Template.php';
 $template=new Template();
 $template->makeHeader("titulo de la pagina web"); 
@@ -22,7 +23,21 @@ $cuentas=new Manager();
 	</div>
 	<div class="col-lg-7 col-md-7">
 		<h3>Donaciones del mes de: <?=getMesName($mes)?></h3>
-		<h4>Total recaudado: $<?=$sub->Total($mes)?></h4>
+		<table class="table table-bordered">
+			<tr class="danger">
+				<td>
+					<label for=""><h4>Total recaudado:</h4></label>
+					
+				</td>
+				<td>
+					<label><h4>Saldo General:</h4></label> 
+				</td>
+			</tr>
+			<tr>
+				<td>$<?=$sub->Total($mes)?></td>
+				<td>$<?=number_format($saldo,2)?></td>
+			</tr>
+		</table>
 		<?php if($total>0): ?>
 		<table class="table table-hover table-condensed table-responsive">
 			<thead>
