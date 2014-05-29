@@ -27,12 +27,12 @@ $Ingreso=$total->resultado();
  </style>
 <div class="row">
 	<div class="col-lg-12 col-md-12">
-		<h1>Reporte General de por Fecha</h1>
+		<h1>Reporte de Donacion de por Fecha</h1>
 <p>Desde: <?=date("d-m-Y",strtotime($desde))?> - Hasta: <?php echo date("d-m-Y",strtotime($hasta)) ?></p>
 						<p>Reporte Generado el <?=date('d-M-Y H:i:s')?> Por: <?=$administrador?></p>	</div>
 </div>
 	<div class="col-lg-12 col-md-12">
-	<a href="../print/index?report=reporteGeneralDonaciones" class="btn btn-info pull-right print hidden-print"><i class="fa fa-print"></i> Imprimir Reporte</a>
+	<a href="../print/index?report=reporteGeneralDonacionesporFecha&desde=<?=$desde?>&hasta=<?=$hasta?>&documento=<?=$documento?>" class="btn btn-info pull-right print hidden-print"><i class="fa fa-print"></i> Imprimir Reporte</a>
 
 		<table class=" table table-condensed table-hover table-striped table-responsive">
 		<thead>

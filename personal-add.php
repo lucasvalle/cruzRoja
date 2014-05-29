@@ -5,11 +5,11 @@ require_once 'controller/Listas.php';
 <form action="controller/Personal.php" id="frmPersonal">
 		<label for="">Carnet</label>
 		<small></small>
-		<input validar required="required" type="text" name="Carnet" id="Carnet" class="form-control" placeholder="N. Carnét" value="423-" pattern="^423\-[0-9]{2,3}$" title="423-05">
+		<input validar  comprobar required="required" type="text" name="Carnet" id="Carnet" class="form-control" placeholder="N. Carnét" value="423-" pattern="^423\-[0-9]{2,3}$" title="423-05">
 		
 		<label for="">Nombre</label>
 		<small></small>
-		<input validar required="required" type="text" name="Nombre" id="Nombre" class="form-control" placeholder="Nombre" pattern="^[a-zA-ZñÑ ]{3,60}$" title="minimo 5 car.">
+		<input validar required="required" type="text" name="Nombre" id="Nombre" class="form-control" placeholder="Nombre" pattern="^[a-zA-ZñÑáéíóú ]{3,60}$" title="minimo 5 car.">
 		
 		<label for="">Cargo</label>
 		<select name="Cargo" id="" class="form-control">
@@ -65,5 +65,19 @@ require_once 'controller/Listas.php';
 				})
 			}
 		})
+
+	  $(document).on("blur","input[comprobar]",function(){
+    	$this=$(this);  	
+    		$.ajax({
+    			url:'controller/Personal.php',
+    			data:"Carne="+$this.val(),
+    			success:function(datos){
+    				if(datos>0){
+    					alert("el Carnet "+$this.val()+ " ya esta registrado")
+    					$("#Carnet").focus()
+    				}
+    			}
+    		})
+  })
 </script>
 	

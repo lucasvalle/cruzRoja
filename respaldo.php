@@ -1,4 +1,12 @@
 <?php 
+@session_start();
+if(@$_SESSION["respaldo"]!=="true"){
+	?>
+	<script>
+		location.replace("seguridadRespaldo")
+	</script>
+	<?php
+}
 require_once 'Template.php';
 $template=new Template();
 $template->makeHeader("titulo de la pagina web"); ?>
@@ -11,8 +19,9 @@ $template->makeHeader("titulo de la pagina web"); ?>
 	</div>
 </div>
 <div class="row">
-	<div class="col-lg-4 col-md-4 text-center">
+	<div class="col-lg-5 col-md-5 text-center">
 		<a href="#" class="btn btn-info btn-lg respaldo"><i class="fa fa-gear fa-3x pull-left"></i> Generar <br> Respaldo</a>
+		<a href="salirModoSeguro" class="btn btn-danger btn-lg"><i class="fa fa-sign-out fa-3x pull-left"></i>salir del modo <br> seguro</a>
 	</div>
 	<div class="col-lg-6 col-md-6">
 		<?php 
@@ -40,6 +49,7 @@ $template->makeHeader("titulo de la pagina web"); ?>
 							<td>
 								<a href="<?=$carpeta.$archivo?>" class="btn btn-info"><i class="fa fa-download"></i></a>
 								<a href="<?=$archivo?>" class="btn btn-danger delete" ><i class="fa fa-trash-o"></i></a>
+								<a href="cargarRespaldo?archivo=<?=$archivo?>" data-name="<?=$archivo?>" class="btn btn-success refresh" ><i class="fa fa-refresh"></i></a>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -59,15 +69,17 @@ $template->makeHeader("titulo de la pagina web"); ?>
 				$.ajax({
 					url:'controller/Respaldo.php?respaldar',
 					success:function(datos){
-						if(datos)
-							{
-								alert("se creo satisfactoriamente")
 								location.reload()
-							}
-						else
-							alert("no se pudo crear el respaldo")
 					}
 				})
+		})
+
+		$("a.refresh").on("click",function(e){
+			$this=$(this);
+			if(confirm("Esta seguro que desea cambiar la base de datos a:" + $this.data("name")+ "despues de este proceso no podra recuperar los datos perdidos"))
+				return true
+			else
+				return false
 		})
 
 		/*eliminar*/

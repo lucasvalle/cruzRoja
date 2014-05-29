@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-05-2014 a las 14:58:41
+-- Tiempo de generación: 27-05-2014 a las 11:17:06
 -- Versión del servidor: 5.5.32
 -- Versión de PHP: 5.4.19
 
@@ -34,16 +34,14 @@ CREATE TABLE IF NOT EXISTS `administradores` (
   `user` varchar(30) NOT NULL,
   `pass` varchar(120) NOT NULL,
   PRIMARY KEY (`idAdmin`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `administradores`
 --
 
 INSERT INTO `administradores` (`idAdmin`, `nombre`, `user`, `pass`) VALUES
-(1, 'Pedro Joaquin arevalo lopez', 'peterpan', 'e10adc3949ba59abbe56e057f20f883e'),
-(11, 'lucas Arturo valle mejia', 'lucas', 'dc53fc4f621c80bdc2fa0329a6123708'),
-(12, 'josue david Arevalo', 'josue', '172522ec1028ab781d9dfd17eaca4427');
+(1, 'admin', 'admin', 'bdc8341bb7c06ca3a3e9ab7d39ecb789');
 
 -- --------------------------------------------------------
 
@@ -69,20 +67,12 @@ CREATE TABLE IF NOT EXISTS `ambulancia` (
 
 CREATE TABLE IF NOT EXISTS `asistencia` (
   `IdAsistencia` int(5) NOT NULL AUTO_INCREMENT,
-  `Carnet` char(6) NOT NULL,
+  `Carnet` char(7) NOT NULL,
   `BrigadaTurno` char(10) DEFAULT NULL,
   `HorasLaboradas` decimal(10,0) NOT NULL,
   `Fecha` date DEFAULT NULL,
   PRIMARY KEY (`IdAsistencia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `asistencia`
---
-
-INSERT INTO `asistencia` (`IdAsistencia`, `Carnet`, `BrigadaTurno`, `HorasLaboradas`, `Fecha`) VALUES
-(1, '4452-3', 'Brigada 2', '6', '0000-00-00'),
-(2, '4425-3', 'Brigada 3', '6', '0000-00-00');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -92,19 +82,10 @@ INSERT INTO `asistencia` (`IdAsistencia`, `Carnet`, `BrigadaTurno`, `HorasLabora
 
 CREATE TABLE IF NOT EXISTS `casos` (
   `IdCasos` int(3) NOT NULL AUTO_INCREMENT,
-  `NombreCaso` varchar(15) NOT NULL,
+  `NombreCaso` varchar(25) NOT NULL,
   `Descripcion` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`IdCasos`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `casos`
---
-
-INSERT INTO `casos` (`IdCasos`, `NombreCaso`, `Descripcion`) VALUES
-(1, 'Fractura', NULL),
-(2, 'Quemadura', NULL),
-(3, 'Parto', '5 Monos');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -113,18 +94,18 @@ INSERT INTO `casos` (`IdCasos`, `NombreCaso`, `Descripcion`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `conceptocuenta` (
+  `idCta` int(11) NOT NULL AUTO_INCREMENT,
   `CtaContable` int(20) NOT NULL,
   `concepto` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`CtaContable`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`idCta`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `conceptocuenta`
 --
 
-INSERT INTO `conceptocuenta` (`CtaContable`, `concepto`) VALUES
-(777, 'Pago de Luz'),
-(999, 'Iniciador');
+INSERT INTO `conceptocuenta` (`idCta`, `CtaContable`, `concepto`) VALUES
+(1, 589744, 'Donaciones');
 
 -- --------------------------------------------------------
 
@@ -136,20 +117,11 @@ CREATE TABLE IF NOT EXISTS `contabilidad` (
   `IdContabilidad` int(5) NOT NULL AUTO_INCREMENT,
   `Fecha` date NOT NULL,
   `CtaContable` int(20) DEFAULT NULL,
-  `NoDocumento` decimal(10,0) DEFAULT NULL,
+  `nDocumento` int(11) DEFAULT NULL,
   `Ingresos` double DEFAULT NULL,
   `Egresos` double DEFAULT NULL,
-  `Saldo` double DEFAULT NULL,
   PRIMARY KEY (`IdContabilidad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `contabilidad`
---
-
-INSERT INTO `contabilidad` (`IdContabilidad`, `Fecha`, `CtaContable`, `NoDocumento`, `Ingresos`, `Egresos`, `Saldo`) VALUES
-(1, '2014-01-01', 999, '9092', 0, 0, 2000),
-(2, '2014-03-27', 777, '1001', 0, 6, 1994);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -161,17 +133,12 @@ CREATE TABLE IF NOT EXISTS `curacionlocal` (
   `IdCuracionLocal` int(4) NOT NULL AUTO_INCREMENT,
   `Caso` int(3) DEFAULT NULL,
   `Diagnostico` varchar(100) DEFAULT NULL,
+  `nombre` varchar(120) NOT NULL,
   `Edad` int(3) DEFAULT NULL,
   `Socorrista` char(6) NOT NULL,
+  `Fecha` date NOT NULL,
   PRIMARY KEY (`IdCuracionLocal`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `curacionlocal`
---
-
-INSERT INTO `curacionlocal` (`IdCuracionLocal`, `Caso`, `Diagnostico`, `Edad`, `Socorrista`) VALUES
-(1, 3, 'No aguanto', 36, 'Pedro');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -181,21 +148,14 @@ INSERT INTO `curacionlocal` (`IdCuracionLocal`, `Caso`, `Diagnostico`, `Edad`, `
 
 CREATE TABLE IF NOT EXISTS `donativo` (
   `IdDonativo` int(5) NOT NULL AUTO_INCREMENT,
+  `nDocumento` int(11) NOT NULL,
   `Donante` varchar(50) NOT NULL,
   `Cantidad` double NOT NULL,
   `DUI` char(10) DEFAULT NULL,
-  `NIT` char(10) DEFAULT NULL,
-  `FechaDonativo` date DEFAULT NULL,
-  `Direccion` varchar(25) DEFAULT NULL,
+  `NIT` char(20) DEFAULT NULL,
+  `Fecha` date DEFAULT NULL,
   PRIMARY KEY (`IdDonativo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `donativo`
---
-
-INSERT INTO `donativo` (`IdDonativo`, `Donante`, `Cantidad`, `DUI`, `NIT`, `FechaDonativo`, `Direccion`) VALUES
-(1, 'Juan Luna', 23.5, '1123445-2', '1234455-1', '0000-00-00', 'Ciudad Arce');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -204,24 +164,14 @@ INSERT INTO `donativo` (`IdDonativo`, `Donante`, `Cantidad`, `DUI`, `NIT`, `Fech
 --
 
 CREATE TABLE IF NOT EXISTS `personal` (
-  `Carnet` char(6) NOT NULL,
-  `Nombres` varchar(25) NOT NULL,
-  `Apellidos` varchar(25) NOT NULL,
+  `idEmpleado` int(11) NOT NULL AUTO_INCREMENT,
+  `Carnet` char(9) NOT NULL,
+  `Nombre` varchar(90) NOT NULL,
   `Cargo` varchar(50) DEFAULT NULL,
   `Brigada` varchar(30) NOT NULL,
   `Activo` int(1) NOT NULL,
-  PRIMARY KEY (`Carnet`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `personal`
---
-
-INSERT INTO `personal` (`Carnet`, `Nombres`, `Apellidos`, `Cargo`, `Brigada`, `Activo`) VALUES
-('1111-1', 'Alvaro Manuel', 'Garciaguirre', 'Motorista', 'Brigada 1', 1),
-('2222-2', 'Eduardo', 'Cisneros', 'Socorrista', 'Brigada 2', 1),
-('3333-3', 'Pedro', 'Arevalo', 'Socorrista', 'Brigada 1', 1),
-('4452-3', 'Jorge Luis', 'Mendoza', 'Socorrista', 'Brigada 2', 1);
+  PRIMARY KEY (`idEmpleado`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -233,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `servicioambulancia` (
   `IdServicioAmbulancia` int(4) NOT NULL AUTO_INCREMENT,
   `Solicitante` varchar(50) DEFAULT NULL,
   `NombrePaciente` varchar(50) NOT NULL,
-  `NombreAcompañante` varchar(50) DEFAULT NULL,
+  `NombreAcompanante` varchar(50) DEFAULT NULL,
   `Caso` int(2) NOT NULL,
   `Diagnostico` varchar(100) DEFAULT NULL,
   `LugarServicio` varchar(25) DEFAULT NULL,
@@ -243,18 +193,15 @@ CREATE TABLE IF NOT EXISTS `servicioambulancia` (
   `Hospital` varchar(50) DEFAULT NULL,
   `HoraSalida` time DEFAULT NULL,
   `Horallegada` time DEFAULT NULL,
-  `Donativo` double DEFAULT NULL,
   `Ambulancia` char(6) NOT NULL,
+  `Fecha` date NOT NULL,
   PRIMARY KEY (`IdServicioAmbulancia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Volcado de datos para la tabla `servicioambulancia`
---
 
-INSERT INTO `servicioambulancia` (`IdServicioAmbulancia`, `Solicitante`, `NombrePaciente`, `NombreAcompañante`, `Caso`, `Diagnostico`, `LugarServicio`, `Motorista`, `Socorrista1`, `Socorrista2`, `Hospital`, `HoraSalida`, `Horallegada`, `Donativo`, `Ambulancia`) VALUES
-(1, 'Juan Lopez', 'Luis Gonzalez', 'Juan Lopez', 1, 'Fractura de tibia', 'Cancha munucipal', '1111-1', '2222-2', '3333-3', 'Hospital Nacional de Ciud', '04:00:00', '06:00:00', 23.5, 'cr-77');
-
+GRANT select, insert, update, delete
+ON cruzroja.*
+TO cruser@localhost identified by 'admin2014';
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

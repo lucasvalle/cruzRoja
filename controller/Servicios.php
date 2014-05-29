@@ -9,14 +9,33 @@ class Servicio extends Manager
 	function getCasos($id='')
 	{
 		$case=new Manager();
-		$case->consultar("select * from casos order by NombreCaso ASC");
+		$case->consultar("select * from casos order by Descripcion ASC");
 		while($row=$case->resultado()):
 				?>
 				<option
 				<?=($id==$row->IdCasos ? "selected=\"selected\"" : "")?>
-				 value="<?=$row->IdCasos?>"><?=$row->NombreCaso?></option>
+				 value="<?=$row->IdCasos?>"><?=$row->Descripcion?></option>
 				<?php
 		endwhile;
+	}
+
+	/*para ver solo el nombre*/
+	function getCaso($id='')
+	{
+		$case=new Manager();
+		$case->consultar("select * from casos where IdCasos=$id");
+		$row=$case->resultado();
+		return $row->Descripcion;
+
+	}
+
+	function getPersona($id='')
+	{
+		$case=new Manager();
+		$case->consultar("select * from personal where idEmpleado=$id");
+		$row=$case->resultado();
+		return $row->Nombre;
+
 	}
 
 	public function getHospitales($nombre='')
@@ -40,7 +59,7 @@ class Servicio extends Manager
 	public function getMotorista($id='')
 	{
 		$motorista=new Manager();
-		$motorista->consultar("select *  from personal where Cargo like '%Motorista'");
+		$motorista->consultar("select *  from personal where Cargo like '%Motorista' and Activo>0");
 		while($row=$motorista->resultado()):
 				?>
 				<option
@@ -53,7 +72,7 @@ class Servicio extends Manager
 	public function getSocorrista($id='')
 	{
 		$motorista=new Manager();
-		$motorista->consultar("select *  from personal where Cargo like '%Socorrista'");
+		$motorista->consultar("select *  from personal where Cargo like '%Socorrista'  and Activo>0");
 		while($row=$motorista->resultado()):
 				?>
 				<option
@@ -96,15 +115,35 @@ if(isset($add)){
 		$msg["errorDocumento"]="Verifique el Numero del documento, este ya esta registrado";
 	
 	if($total+$f==0):
-			if($nuevo->crud("insert into servicioambulancia values('','$Solicitante','$NombrePaciente','$NombreAcompanante','$Caso','$Diagnostico','$LugarServicio','$Motorista','$Socorrista1','$Socorrista2','$Hospital','$HoraSalida','$Horallegada','$Ambulancia','$Fecha')")):
+			if($nuevo->crud("insert into servicioambulancia values('','$Solicitante','$NombrePaciente','$NombreAcompanante','$Caso','$Diagnostico','','$Motorista','$Socorrista1','$Socorrista2','$Hospital','$HoraSalida','$Horallegada','$Ambulancia','$Fecha')")):
 				if($Cantidad!=""):
 					if($nuevo->crud("insert into donativo values('','$nDocumento','$Donante','$Cantidad','$DUI','$NIT','$Fecha')")):
 						if($nuevo->crud("insert into contabilidad values('','$Fecha','$idCta','$nDocumento','$Cantidad','0')"))
 							$msg["insert"]="se Inseto correctamente";
 					endif;
 				endif;
+				$msg["insert"]="se Inseto correctamente";
 			else:
 				$msg["errorInsert"]="No se pudo insertar el registro";
+			endif;
+	endif;
+	echo json_encode($msg);
+}
+
+if(isset($upd)){
+	$nuevo=new Manager();
+	$hoy=date("Y-m-d");
+	$f=0;
+	if(strtotime($hoy) < strtotime($Fecha)){
+		$msg["errorFecha"]="No se permite registrar Servicios a futuro, verifique la fecha";
+		$f++;
+	}
+
+	if($f==0):
+			if($nuevo->crud("update servicioambulancia set Solicitante='$Solicitante',NombrePaciente='$NombrePaciente',NombreAcompanante='$NombreAcompanante',Caso='$Caso',Diagnostico='$Diagnostico',Motorista='$Motorista',Socorrista1='$Socorrista1',Socorrista2='$Socorrista2',Hospital='$Hospital',HoraSalida='$HoraSalida',Horallegada='$Horallegada',Ambulancia='$Ambulancia',Fecha='$Fecha' where IdServicioAmbulancia=$id")):
+				$msg["insert"]="se Modifico correctamente";
+			else:
+				$msg["errorInsert"]="No se pudo Modificar el registro";
 			endif;
 	endif;
 	echo json_encode($msg);

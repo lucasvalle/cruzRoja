@@ -1,16 +1,19 @@
 <?php 
 require_once 'controller/Servicios.php';
-require_once 'controller/Donaciones.php';
 $interface=new Servicio();
 
-$cta=new Donacion();
-
-
-$casos=new manager();
+$casos=new Manager();
 
 require_once 'Template.php';
 $template=new Template();
-$template->makeHeader("titulo de la pagina web"); ?>
+$template->makeHeader("Modificar Servicio Ambulancia"); 
+
+/*buscar datos del servicio*/
+$servicio=new Manager();
+$servicio->consultar("select * from servicioambulancia where IdServicioAmbulancia=$id");
+$row=$servicio->resultado();
+
+?>
 <!-- aqui inicia el contenido -->
 <div class="row">
 	<div class="col-lg-12">
@@ -20,34 +23,40 @@ $template->makeHeader("titulo de la pagina web"); ?>
 	</div>
 </div>
 <div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="alert alert-success ocultar" id="success"></div>
+		<div class="alert alert-danger ocultar" id="error"></div>
+	</div>
+</div>
+<div class="row">
 		<div class="col-lg-12 col-md-12">
 			<?php if($casos->contar("select * from casos")>0): ?>
 			<form action="controller/Servicios.php" method="post" id="frmServicios">
 			<div class="row">
 				<div class="col-lg-2 col-md-2"><label for="">Caso</label>
 					<select name="Caso" id="Caso" class="form-control input-sm" required="required">
-						<?php $interface->getCasos() ?>
+						<?php $interface->getCasos($row->Caso) ?>
 					</select>
 				</div>
 
 				<div class="col-lg-4 col-md-4"><label for="">nombre del Paciente</label>
 					<small></small>
-					<input type="text" name="NombrePaciente" id="NombrePaciente" class="form-control input-sm" value="" required="required" patterns="" title="">
+					<input type="text" name="NombrePaciente" id="NombrePaciente" class="form-control input-sm" value="<?=$row->NombrePaciente?>" required="required" patterns="" title="">
 				</div>
 
 				<div class="col-lg-3 col-md-3"><label for="">Solicitante</label>
 					<small></small>
-					<input type="text" name="Solicitante" id="Solicitante" class="form-control input-sm" value="">
+					<input type="text" name="Solicitante" id="Solicitante" class="form-control input-sm" value="<?=$row->Solicitante?>">
 				</div>
 				<div class="col-lg-3 col-md-3"><label for="">Acompañarte</label>
 					<small></small>
-					<input type="text" name="NombreAcompanante" id="NombreAcompanante" class="form-control input-sm" value="">
+					<input type="text" name="NombreAcompanante" id="NombreAcompanante" class="form-control input-sm" value="<?=$row->NombreAcompanante?>">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-6 col-md-6">
 					<label for="">Diagnostico</label>
-					<textarea class="form-control input-sm" name="Diagnostico" rows="4"></textarea>
+					<textarea class="form-control input-sm" name="Diagnostico" rows="4"><?=$row->Diagnostico?></textarea>
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<!-- <label for="">Lugar de Servicio</label> -->
@@ -55,7 +64,7 @@ $template->makeHeader("titulo de la pagina web"); ?>
 
 					<label for="">Hospital de referencia</label>
 					<select name="Hospital" id="Hospital" class="form-control input-sm" required="required">
-						<?php $interface->getHospitales() ?>
+						<?php $interface->getHospitales($row->Hospital) ?>
 					</select>
 
 				</div>
@@ -64,84 +73,53 @@ $template->makeHeader("titulo de la pagina web"); ?>
 				<div class="col-lg-4 col-md-4">
 					<label for="">Motorista</label><small></small>
 					<select name="Motorista" id="Motorista" class="form-control input-sm" required="required">
-						<?php $interface->getMotorista() ?>
+						<?php $interface->getMotorista($row->Motorista) ?>
 					</select>
 				</div>
 				<div class="col-lg-2 col-md-2">
 					<label for="">Ambulancia</label><small></small>
 					<select name="Ambulancia" id="Ambulancia" class="form-control input-sm" required="required">
-					<?php $interface->getAmbulancia() ?>
+					<?php $interface->getAmbulancia($row->Ambulancia) ?>
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-3">
 					<label for="">Hora de Salida</label>
 					<small></small>
-					<input type="time" name="HoraSalida" id="HoraSalida" class="form-control input-sm" value="" required="required" title="">
+					<input type="time" name="HoraSalida" id="HoraSalida" class="form-control input-sm" value="<?=$row->HoraSalida?>" required="required" title="">
 				</div>
 				<div class="col-lg-3 col-md-3">
 					<label for="">Hora de llegada</label>
 					<small></small>
-					<input type="time" name="Horallegada" id="Horallegada" class="form-control input-sm" value="" required="required" title="">
+					<input type="time" name="Horallegada" id="Horallegada" class="form-control input-sm" value="<?=$row->Horallegada?>" required="required" title="">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-md-4">
 					<label for="">Socorrista 1</label><small></small>
 					<select name="Socorrista1" id="Socorrista1" class="form-control input-sm" required="required">
-						<?php $interface->getSocorrista() ?>
+						<?php $interface->getSocorrista($row->Socorrista1) ?>
 					</select>
 				</div>
 				<div class="col-lg-4 col-md-4">
 					<label for="">Socorrista 2</label><small></small>
 					<select name="Socorrista2" id="Socorrista2" class="form-control input-sm" required="required">
-						<?php $interface->getSocorrista() ?>
+						<?php $interface->getSocorrista($row->Socorrista2) ?>
 						
 					</select>
 				</div>
 				<div class="col-lg-4 col-md-4">
 					<label for="">Fecha</label>
-					<input type="date" name="Fecha" id="Fecha" class="form-control input-sm" value="" required="required" title="">
+					<input type="date" name="Fecha" id="Fecha" class="form-control input-sm" value="<?=$row->Fecha?>" required="required" title="">
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-12 col-md-12">
-					<h3>Donación</h3>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-2 col-md-2">
-					<label for="">Documento</label><small></small>
-					<input type="text" name="nDocumento" id="nDocumento" class="form-control input-sm" value="" >
-				</div>
-
-				<div class="col-lg-4 col-md-4">
-					<label for="">Nombre Donante</label><small></small>
-					<input type="text" name="Donante" id="Donante" class="form-control input-sm" value="" >
-				</div>
-
-					<div class="col-lg-1 col-md-1">
-						<label for="">Cantidad:</label>
-						<small></small>
-						<input type="text" name="Cantidad" id="Cantidad" class="form-control input-sm" value="" validar  pattern="^[0-9.\]+$" title="formato moneda">
-					</div>
-
-					<div class="col-lg-2 col-md-2">
-						<label for="">DUI:</label>
-						<small></small>
-						<input type="text" name="DUI" id="DUI" class="form-control input-sm" value=""   pattern="^[0-9]{8}-[0-9]{1}$"  title="00000000-0" placeholder="xxxxxxxx-x">
-					</div>
-					<div class="col-lg-3 col-md-3">
-						<label for="">NIT:</label>
-						<small></small>
-						<input type="text" name="NIT" id="NIT" class="form-control input-sm" value=""  title="xxxx-xxxxxx-xxx-x" pattern="^[0-9]{4}\-[0-9]{6}-[0-9]{3}-[0-9]{1}" placeholder="xxxx-xxxxxx-xxx-x">
-					</div>
-			</div>
+			
+			<p></p>
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-lg-offset-4 col-md-offset-4">
-					<label for=""></label>
-					<input type="hidden" name="idCta" value="<?=$cta->cuentaDonacion()?>">
-					<input type="hidden" name="add">
-					<button class="btn btn-info btn-block btn-lg"><i class="fa fa-save"></i> Guardar Servicio</button>
+					<input type="hidden" name="upd">
+					<input type="hidden" name="id" value="<?=$id?>">
+					<button class="btn btn-info btn-lg"><i class="fa fa-refresh"></i> Actualizar</button>
+					<a  href="servicios" class="btn btn-default btn-lg"><i class="fa fa-times"></i> Cancelar</a>
 				</div>
 			</div>
 		</form>
@@ -172,9 +150,6 @@ $template->makeHeader("titulo de la pagina web"); ?>
 					success:function(datos){
 						if(datos.errorFecha)
 							alert(datos.errorFecha)
-
-						if(datos.errorDocumento)
-							alert(datos.errorDocumento)
 						
 						if(datos.insert){
 							$("#success").append("<li>"+datos.insert).fadeIn()

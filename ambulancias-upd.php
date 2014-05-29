@@ -17,7 +17,7 @@ $row=$amb->resultado();
 							<div class="col-lg-6 col-md-6">
 								<label  for="">Placa:</label>
 								<small></small>
-								<input validar type="text" required="required" min="5" max="7" pattern="^P[0-9]{5,7}" title="P000123" name="Placa" value="<?=$row->Placa?>" id="input" class="form-control" placeholder="Introduce la placa">
+								<input validar type="text" required="required" min="4" max="6" pattern="^CR [0-9]{1,3}$" title="CR 000" name="Placa" value="<?=$row->Placa?>" id="input" class="form-control" placeholder="Introduce la placa">
 							</div>
 							<div class="col-lg-6 col-md-6">
 								<label  for="">Marca:</label>
@@ -36,7 +36,7 @@ $row=$amb->resultado();
 							<div class="col-lg-6 col-md-6">
 							<label for="">Año</label>
 							<small></small>
-								<input  validar type="text" name="Anio" value="<?=$row->Anio?>" id="input" class="form-control"  required="required" pattern="^[0-9]{2,4}" title="97 ó 1997">
+								<input anio  validar type="text" name="Anio" value="<?=$row->Anio?>" id="input" class="form-control"  required="required" pattern="^[0-9]{2,4}" title="97 ó 1997">
 							</div>
 						</div>
 

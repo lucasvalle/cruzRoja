@@ -37,8 +37,18 @@ if(isset($add)){
 
 	if($total>0)
 		$msg["errorDocumento"]="Ya existe";
+
+	$mesActual=date("m");
+	$getFecha=split("-", $Fecha);
+	$mesAntes=0;
+	if($getFecha[1]<$mesActual){
+		$mesAntes++;
+		$msg["noVale"]="no se permite hacer donaciones a meses anteriores";
+	}
+
+
 	
-	if($total+$f==0):
+	if($total+$f+$mesAntes==0):
 			if($nuevo->crud("insert into $tabla values('','$nDocumento','$Donante','$Cantidad','$DUI','$NIT','$Fecha')")):
 				$msg["insert"]="se Inseto correctamente";
 			$nuevo->crud("insert into contabilidad values('','$Fecha','$idCta','$nDocumento','$Cantidad','0')");

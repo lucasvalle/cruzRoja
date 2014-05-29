@@ -59,4 +59,20 @@ if(isset($del)){
 	$administrador=new Manager();
 	echo $administrador->delete("delete from $tabla where idAdmin=$id");
 }
+
+if(isset($seguridad)){
+	$escudo=new Manager();
+	$pass=trim(md5($pass));
+	if($escudo->contar("select * from administradores where idAdmin=$id and pass='$pass'")>0)
+		{
+			$msg["ok"]="si se encontro";
+			@session_start();
+			$_SESSION["respaldo"]="true";
+		}
+	else
+		$msg["no"]="no se encontro";
+
+
+	echo json_encode($msg);
+}
  ?>

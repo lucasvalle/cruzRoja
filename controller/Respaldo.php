@@ -1,4 +1,11 @@
-<?php 
+<!doctype html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <title>Document</title>
+</head>
+<body>
+   <?php 
 @require_once 'Manager.php';
 function backup_tables($tables = '*')
 {
@@ -20,6 +27,9 @@ $admin=new Manager();
    }
    
    //cycle through
+   $return='DROP DATABASE `cruzroja`;';
+   $return.='CREATE DATABASE IF NOT EXISTS `cruzroja` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+         USE `cruzroja`;';
    foreach($tables as $table)
    {
       $result = mysql_query('SELECT * FROM '.$table);
@@ -50,13 +60,14 @@ $admin=new Manager();
    //save file
    $handle = fopen('../respaldos/CruzRojaDB'.date("d-m-Y H.i.s").'.sql','w+');
    if(fwrite($handle,$return))
-   	return true;
+      return true;
    fclose($handle);
-
    return false;
 }
-
-
+    ?>
+</body>
+</html>
+<?php 
 
 /*para generar el respaldo*/
 if(isset($respaldar)){

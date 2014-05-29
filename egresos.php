@@ -1,6 +1,7 @@
 <?php 
 require_once 'controller/Egresos.php';
 require_once 'controller/Listas.php';
+require_once 'controller/saldo.php';
 require_once 'Template.php';
 $template=new Template();
 $template->makeHeader("titulo de la pagina web"); 
@@ -11,6 +12,8 @@ $mes=date("m");
 $salida->consultar("SELECT * FROM contabilidad WHERE month(Fecha)=$mes and Egresos>0 order by Fecha desc");
 
 $total=$salida->contar("SELECT * FROM contabilidad WHERE month(Fecha)=$mes and Egresos>0 order by Fecha desc");
+
+
 ?>
 <!-- aqui inicia el contenido -->
 <div class="row">
@@ -25,7 +28,16 @@ $total=$salida->contar("SELECT * FROM contabilidad WHERE month(Fecha)=$mes and E
 	</div>
 	<div class="col-lg-7 col-md-7">
 		<h3>Egresos del mes de: <?=getMesName($mes)?></h3>
-		<h4>Total Egresado: $<?=$sub->Total($mes)?></h4>
+		<table class="table-bordered table">
+			<tr class="danger">
+				<td><h4>Egresado en este mes:</h4></td>
+				<td><h4>Saldo General: </h4></td>
+			</tr>
+			<tr>
+				<td><strong>$<?=$sub->Total($mes)?></strong></td>
+				<td><strong>$<?php echo number_format($saldo,2) ?></strong></td>
+			</tr>
+		</table>
 		<span id="saldo" class="ocultar"><?=$detalle->saldo()?></span>	
 		<?php if($total>0): ?>
 		<table class="table table-hover table-condensed table-responsive">

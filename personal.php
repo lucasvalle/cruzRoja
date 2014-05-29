@@ -127,8 +127,6 @@ $template->makeHeader("titulo de la pagina web"); ?>
 								$this.parent().parent().fadeOut().remove()
 							if($("table tbody tr").length < 1)
 								location.reload()
-							else
-								alert("no se ha podido eliminar ningun registro");
 						}
 					})	
 				}

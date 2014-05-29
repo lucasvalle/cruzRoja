@@ -1,6 +1,7 @@
 <?php 
 require_once 'controller/Donaciones.php';
 require_once 'controller/Listas.php';
+require_once 'controller/saldo.php';
 require_once 'Template.php';
 $template=new Template();
 $template->makeHeader("titulo de la pagina web"); 
@@ -9,8 +10,11 @@ $sub=new Donacion;
 $mes=date("m");
 $donaciones->consultar("SELECT * FROM `donativo` WHERE month(Fecha)=$mes order by Fecha desc");
 $total=$donaciones->contar("SELECT * FROM `donativo` WHERE month(Fecha)=$mes order by Fecha desc");
+
+$cuentas=new Manager();
 ?>
 <!-- aqui inicia el contenido -->
+<?php if($cuentas->contar("select * from conceptocuenta")>0): ?>
 <div class="row">
 </div>
 <div class="row">
@@ -19,7 +23,21 @@ $total=$donaciones->contar("SELECT * FROM `donativo` WHERE month(Fecha)=$mes ord
 	</div>
 	<div class="col-lg-7 col-md-7">
 		<h3>Donaciones del mes de: <?=getMesName($mes)?></h3>
-		<h4>Total recaudado: $<?=$sub->Total($mes)?></h4>
+		<table class="table table-bordered">
+			<tr class="danger">
+				<td>
+					<label for=""><h4>Total recaudado:</h4></label>
+					
+				</td>
+				<td>
+					<label><h4>Saldo General:</h4></label> 
+				</td>
+			</tr>
+			<tr>
+				<td>$<?=$sub->Total($mes)?></td>
+				<td>$<?=number_format($saldo,2)?></td>
+			</tr>
+		</table>
 		<?php if($total>0): ?>
 		<table class="table table-hover table-condensed table-responsive">
 			<thead>
@@ -62,6 +80,15 @@ $total=$donaciones->contar("SELECT * FROM `donativo` WHERE month(Fecha)=$mes ord
 <?php endif; ?>
 	</div>
 </div>
+<?php else: ?>
+	<div class="row">
+		<div class="col-lg-6 col-lg-offset-3">
+			<div class="alert alert-danger">
+				no hay cuentas resgistradas en el catologo <a href="decalogo" class="btn btn-danger"><i class="fa fa-plus"></i> nueva Cuenta</a>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>
 <!-- fin del contenido -->
 <?php $template->makeFooter() ?>
 <script>
